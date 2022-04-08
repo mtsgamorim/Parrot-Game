@@ -54,6 +54,7 @@ h1 {
  .girar {
     transform: rotateY(180deg);
  }
+
  .front {
     backface-visibility: hidden;
  }

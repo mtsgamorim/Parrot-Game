@@ -1,6 +1,4 @@
 let cartasEmJogo = [];
-let embaralhar = [];
-
 let baralho = [
     {
         nome: "carta1",
@@ -60,11 +58,43 @@ let baralho = [
     }
 ]
 
-let cartas = [];
+let primeiraCarta = "";
+let segundaCarta = "";
+let pai = document.querySelector(".conteudo");
 
 
 function clicarCarta (elemento){
-    elemento.classList.toggle("girar")
+    if(elemento.classList.contains("girar") === false && pai.classList.contains("aguardar") === false){
+        console.log("entrei");
+        console.log(elemento.parentNode);
+        elemento.classList.add("girar");
+        if(primeiraCarta === ""){
+            primeiraCarta = elemento;
+            
+        }else{
+            segundaCarta = elemento;
+            pai.classList.add("aguardar");
+            verificaIgualdade();
+        }
+    }
+}
+
+function verificaIgualdade(){
+    if(primeiraCarta.innerHTML !== segundaCarta.innerHTML){
+        setTimeout(esperar, 1000);
+    }else {
+        primeiraCarta = "";
+        segundaCarta = "";
+        pai.classList.remove("aguardar");
+    }
+}
+
+function esperar(){
+    primeiraCarta.classList.remove("girar");
+    segundaCarta.classList.remove("girar");
+    primeiraCarta = "";
+    segundaCarta = "";
+    pai.classList.remove("aguardar");
 }
 
 function comparador() { 
@@ -83,7 +113,6 @@ if(qntdCartas % 2 === 0 && qntdCartas >= 4 && qntdCartas <= 14){
     }
     cartasEmJogo = cartasEmJogo.sort(comparador);
     for(let i = 0; i < qntdCartas; i++) {
-        cartas[i] = cartasEmJogo[i].nome;
         elemento.innerHTML += `<div class="cards">
         <div class="card" onclick="clicarCarta(this)">
            <div class="face front">
