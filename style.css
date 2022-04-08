@@ -27,9 +27,20 @@ h1 {
     margin-left: auto;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .card {
+    display: flex;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: all 1s;
+    margin-right:70px;
+    margin-left: 70px;
+    margin-bottom: 200px;
+    
+}
+.face {
     width: 117px;
     height: 146px;
     display: flex;
@@ -38,9 +49,21 @@ h1 {
     background-color: #A7E9AF;
     border: 1px solid #99CEA8;
     border-radius: 5px;
+    position: absolute;
 }
+ .girar {
+    transform: rotateY(180deg);
+ }
+ .front {
+    backface-visibility: hidden;
+ }
+ .back {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+ }
 
-.card img {
+
+.face img {
     width: 100px;
     height: 100px;
 }
