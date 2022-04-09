@@ -61,12 +61,13 @@ let baralho = [
 let primeiraCarta = "";
 let segundaCarta = "";
 let pai = document.querySelector(".conteudo");
-
+let cartasAcertadas = 0;
+let rodadas = 0;
+const qntdCartas = prompt("Quantas cartas jogar? Apenas valores pares de 4 a 14");
 
 function clicarCarta (elemento){
     if(elemento.classList.contains("girar") === false && pai.classList.contains("aguardar") === false){
-        console.log("entrei");
-        console.log(elemento.parentNode);
+        rodadas++;
         elemento.classList.add("girar");
         if(primeiraCarta === ""){
             primeiraCarta = elemento;
@@ -86,6 +87,10 @@ function verificaIgualdade(){
         primeiraCarta = "";
         segundaCarta = "";
         pai.classList.remove("aguardar");
+        cartasAcertadas = cartasAcertadas + 2;
+        if(cartasAcertadas == qntdCartas){
+            setTimeout(ganhou, 600);
+        }
     }
 }
 
@@ -101,11 +106,15 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
+function ganhou() {
+    alert(`Você ganhou em ${rodadas} jogadas!`);
+}
 
 
-const qntdCartas = prompt("Quantas cartas jogar? Apenas valores pares de 4 a 14");
+
+
 if(qntdCartas % 2 === 0 && qntdCartas >= 4 && qntdCartas <= 14){
-   // JOGO RODA NESSE ESPAÇO
+   
     const elemento = document.querySelector(".conteudo");
     elemento.innerHTML = "";
     for(let i = 0; i < qntdCartas; i++) {
@@ -127,33 +136,6 @@ if(qntdCartas % 2 === 0 && qntdCartas >= 4 && qntdCartas <= 14){
     }
 
     
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // JOGO RODA NESSE ESPAÇO
 }else {
     alert("QUANTIDADE DE CARTAS INVÁLIDOS");
 }
